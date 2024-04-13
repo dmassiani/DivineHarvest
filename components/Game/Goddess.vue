@@ -1,3 +1,39 @@
+<script setup>
+
+  import _ from 'lodash'
+  import { useAppStore } from '~/stores/app'
+  const appStore = useAppStore();
+  const season = ref(appStore.season); // Make appStore.season reactive
+
+  watch(() => appStore.season, (newSeason) => {
+    season.value = newSeason;
+  })
+
+  const invocation = () => {
+    const invocations = appStore.invocations;
+    const goddessInvocations = _.filter(invocations, { 'goddess': true });
+    const randomInvocation = _.sample(goddessInvocations);
+    // Perform the invocation logic using randomInvocation
+    // console.log('Random Invocation', randomInvocation, season.value, randomInvocation[season.value])
+    // const goddessInvocation = randomInvocation[season.value];
+    console.log('new invocation');
+    // Update the appStore
+    appStore.currentInvocations.push(randomInvocation);
+
+    clearInterval(timer);
+    timer = setInterval(() => {
+      invocation();
+    }, _.random(3000, 20000));
+  };
+
+  let timer = null;
+  onMounted(() => {
+    timer = setInterval(() => {
+      invocation()
+    }, 6000)
+  })
+
+</script>
 <template>
     <div class="flex-none w-3/12 h-full bg-green-100">
         <div class="flex flex-col items-center justify-center">

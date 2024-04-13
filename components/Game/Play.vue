@@ -1,5 +1,12 @@
 <script setup>
 
+  import { useAppStore } from '~/stores/app'
+  const appStore = useAppStore();
+
+  const tunes = computed(() => {
+    return Math.round(appStore.tunes / 10);
+  });
+
   let seasonCursor = 0;
   const seasons = ['winter', 'spring', 'summer', 'fall'];
   const season = ref(seasons[seasonCursor]);
@@ -20,6 +27,8 @@
       seasonCursor++;
     }
     season.value = seasons[seasonCursor];
+    appStore.currentSeason = season.value;
+
   }
 
   const startSeasonsTimer = () => {
@@ -45,12 +54,9 @@
       <header class="flex flex-col w-full space-y-4">
 
         <!-- Les scores -->
-        <div class="flex flex-row">
-          <div class="w-1/2">
-            <h1 class="text-4xl font-bold">$0</h1>
-          </div>
-          <div class="w-1/2">
-            <h1 class="text-4xl font-bold">0pt</h1>
+        <div class="flex flex-row justify-end">
+          <div class="">
+            <h1 class="text-4xl font-bold">${{ tunes }}</h1>
           </div>
         </div>
 
@@ -69,33 +75,15 @@
       <!-- Le jardin qui est une grille de 3 -->
       <main class="mt-4">
         <div class="grid grid-cols-3 gap-4 h-full">
-          <div class="h-48 bg-white rounded-lg">
-
-          </div>
-          <div class="h-48 bg-white rounded-lg">
-
-          </div>
-          <div class="h-48 bg-white rounded-lg">
-
-          </div>
-          <div class="h-48 bg-white rounded-lg">
-
-          </div>
-          <div class="h-48 bg-white rounded-lg">
-
-          </div>
-          <div class="h-48 bg-white rounded-lg">
-
-          </div>
-          <div class="h-48 bg-white rounded-lg">
-
-          </div>
-          <div class="h-48 bg-white rounded-lg">
-
-          </div>
-          <div class="h-48 bg-white rounded-lg">
-
-          </div>
+          <GameGarden />
+          <GameGarden />
+          <GameGarden />
+          <GameGarden />
+          <GameGarden />
+          <GameGarden />
+          <GameGarden />
+          <GameGarden />
+          <GameGarden />
         </div>
       </main>
 
