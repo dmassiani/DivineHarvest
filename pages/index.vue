@@ -1,7 +1,9 @@
 <script setup></script>
 
 <template>
-  <UiContainer>
-    <LandingHeroDemo />
-  </UiContainer>
+  <div class="flex h-screen bg-red-200">
+    <GameInvocationsBar />
+    <GamePlay />
+    <GameGoddess />
+  </div>
 </template>

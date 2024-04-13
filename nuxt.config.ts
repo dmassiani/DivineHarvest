@@ -18,14 +18,6 @@ export default defineNuxtConfig({
     "@morev/vue-transitions/nuxt"
   ],
 
-  site: {
-    url: "https://demo.supernuxt.dev",
-    name: "Demo about Super Nuxt !",
-    description:
-      "Boilerplate for Nuxt.js with Vercel and Supabase. Perfect for freelancers and small businesses.",
-    defaultLocale: "en", // not needed if you have @nuxtjs/i18n installed
-  },
-
   routeRules: {
     // Don't add any /secret/** URLs to the sitemap.xml
     // '/logout': { robots: false },
