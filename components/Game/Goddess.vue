@@ -4,19 +4,13 @@
   import { useAppStore } from '~/stores/app'
   const appStore = useAppStore();
   const season = ref(appStore.season); // Make appStore.season reactive
-
+  const goddessInvocations = ref(_.filter(appStore.invocations, { 'goddess': true }));
   watch(() => appStore.season, (newSeason) => {
     season.value = newSeason;
   })
 
   const invocation = () => {
-    const invocations = appStore.invocations;
-    const goddessInvocations = _.filter(invocations, { 'goddess': true });
-    const randomInvocation = _.sample(goddessInvocations);
-    // Perform the invocation logic using randomInvocation
-    // console.log('Random Invocation', randomInvocation, season.value, randomInvocation[season.value])
-    // const goddessInvocation = randomInvocation[season.value];
-    console.log('new invocation');
+    const randomInvocation = _.sample(goddessInvocations.value);
     // Update the appStore
     appStore.currentInvocations.push(randomInvocation);
 

@@ -5,17 +5,28 @@
     import _ from 'lodash'
     const appStore = useAppStore();
     const currentSemence = ref(null)
-    const season = ref(appStore.season)
+    const malus = ref(0);
 
-    watch(() => appStore.season, (newSeason) => {
-        season.value = newSeason
-    })
 
-    const { currentInvocations } = storeToRefs(appStore)
+    const { currentInvocations, season } = storeToRefs(appStore)
+    
+    const sumQualityAndQuantity = () => {
+        let sum = 0;
+        currentInvocations.value.forEach((invocation) => {
+            sum += invocation[season.value].quality + invocation[season.value].quantity;
+        });
+        // console.log('Sum of quality and quantity:', sum);
+        return sum;
+    };
 
     watch(() => currentInvocations, (newInvocations) => {
-        console.log('new invocations', newInvocations)
-    })
+        // console.log('new invocations', newInvocations);
+        sumQualityAndQuantity();
+    }, { deep: true })
+    watch(() => season, (newSeason) => {
+        console.log('new season');
+        // season.value = newSeason
+    }, { deep: true })
 
     const semenceConfig = ref({
         quality: 0,

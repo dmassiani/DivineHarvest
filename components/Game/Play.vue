@@ -55,9 +55,7 @@
 
         <!-- Les scores -->
         <div class="flex flex-row justify-end">
-          <div class="">
-            <h1 class="text-4xl font-bold">${{ tunes }}</h1>
-          </div>
+          <h1 class="text-4xl font-bold">${{ tunes }}</h1>
         </div>
 
         <!-- Les saisons -->
