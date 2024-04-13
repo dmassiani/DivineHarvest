@@ -9,7 +9,7 @@
         </div>
         <div>
           <!-- circle timer -->
-          Timer test
+          Timer
         </div>
         <div class="relative">
           <div class="bg-stone-100 h-40 w-32 shadow-xl absolute p-4 rounded-lg top-0 left-32">
