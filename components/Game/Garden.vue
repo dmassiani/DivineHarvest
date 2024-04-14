@@ -109,6 +109,7 @@
             return
         }
         currentSemence.value = appStore.selectedSemence
+        useNuxtApp().callHook("app:semence", currentSemence.value)
         appStore.selectedSemence = null
 
         semenceConfig.value.quality = currentSemence.value[season.value].quality + malusQuality.value

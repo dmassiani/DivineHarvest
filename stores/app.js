@@ -3,6 +3,7 @@ import { acceptHMRUpdate, defineStore } from "pinia";
 export const useAppStore = defineStore("app", {
   state: () => {
     return {
+      playerSemences: [],
       season: "winter",
       tunes: 0,
       malus: {
@@ -754,7 +755,8 @@ export const useAppStore = defineStore("app", {
       ],
       goddessInvocations: [],
       playerInvocations: [],
-      currentInvocations: []
+      currentInvocations: [],
+      nouvelleRecompenses: []
     }
   },
   getters: {
@@ -768,6 +770,12 @@ export const useAppStore = defineStore("app", {
   actions: {
     selectSemence: (semence) => {
       this.selectedSemence = semence
+    },
+    addPlayerInvocation: (invocation) => {
+      this.playerInvocations.push(invocation)
+    },
+    addPlayerSemence: (semence) => {
+      this.playerSemences.push(semence)
     }
   }
 });
