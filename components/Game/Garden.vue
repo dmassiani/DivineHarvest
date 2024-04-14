@@ -5,27 +5,51 @@
     import _ from 'lodash'
     const appStore = useAppStore();
     const currentSemence = ref(null)
-    const malus = ref(0);
-
+    const malusQuantity = ref(0);
+    const malusQuality = ref(0);
+    const malusGrow = ref(100);
 
     const { currentInvocations, season } = storeToRefs(appStore)
-    
-    const sumQualityAndQuantity = () => {
-        let sum = 0;
+    let timer = null;
+
+    const defineMalus = () => {
+        let sumQuality = 0;
+        let sumQuantity = 0;
+        let grow = 0;
         currentInvocations.value.forEach((invocation) => {
-            sum += invocation[season.value].quality + invocation[season.value].quantity;
+            sumQuality += invocation[season.value].quality;
+            sumQuantity += invocation[season.value].quantity;
+            grow += invocation[season.value].grow;
         });
         // console.log('Sum of quality and quantity:', sum);
-        return sum;
+        malusQuality.value = sumQuality;
+        malusQuantity.value = sumQuantity;
+        // malusGrow est une moyenne de grow et du nombre d'invocations
+        malusGrow.value = Math.round(grow / currentInvocations.value.length);
     };
 
+
+    // ##########################################
+    // NOUVELLE INCANTATION
+    // ##########################################
     watch(() => currentInvocations, (newInvocations) => {
-        // console.log('new invocations', newInvocations);
-        sumQualityAndQuantity();
+        defineMalus();
+        if(currentSemence.value !== null){
+            if (timer !== null) {
+                clearInterval(timer);
+            }
+            timer = setInterval(() => {
+                // je fais pousser les semences
+                semenceConfig.value.grow++
+            }, 100 + (malusGrow.value * 5))
+        }
     }, { deep: true })
+
+    // ##########################################
+    // CHANGEMENT DE SAISON
+    // ##########################################
     watch(() => season, (newSeason) => {
-        console.log('new season');
-        // season.value = newSeason
+        defineMalus();
     }, { deep: true })
 
     const semenceConfig = ref({
@@ -40,7 +64,6 @@
         appStore.tunes += gain
     }
 
-    let timer = null;
     const clickOnGarden = () => {
 
         // je relance un setinterval de pousse
@@ -66,20 +89,15 @@
         currentSemence.value = appStore.selectedSemence
         appStore.selectedSemence = null
 
-        semenceConfig.value.quality = currentSemence.value[season.value].quality
-        semenceConfig.value.quantity = currentSemence.value[season.value].quantity
+        semenceConfig.value.quality = currentSemence.value[season.value].quality + malusQuality.value
+        semenceConfig.value.quantity = currentSemence.value[season.value].quantity + malusQuantity.value
 
         timer = setInterval(() => {
             // je fais pousser les semences
             semenceConfig.value.grow++
-        }, 100)
+        }, 100 + (malusGrow.value * 5))
 
     }
-
-    // Je dois définir le temps de poussée de la semence
-    // je défini sa qualité
-    // je défini sa quantité
-    // la quantité est variable entre un spectre défini par la saison
 
 
 </script>

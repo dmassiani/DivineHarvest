@@ -4,7 +4,7 @@
   const appStore = useAppStore();
   const semences = ref(appStore.getSemences)
   const season = ref(appStore.season)
-  const switcher = ref('invocations')
+  const switcher = ref('semences')
 
   const switchInvocationsSemences = () => {
     switcher.value = switcher.value === 'invocations' ? 'semences' : 'invocations'

@@ -27,7 +27,7 @@
       seasonCursor++;
     }
     season.value = seasons[seasonCursor];
-    appStore.currentSeason = season.value;
+    appStore.season = season.value;
 
   }
 

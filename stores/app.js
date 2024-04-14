@@ -416,21 +416,25 @@ export const useAppStore = defineStore("app", {
           winter: {
             quality: +3,
             quantity: 0,
+            grow: 130,
             type: "bad"
           },
           spring: {
             quality: 0,
             quantity: -1,
+            grow: 60,
             type: "good"
           },
           summer: {
             quality: +3,
             quantity: -2,
+            grow: 50,
             type: "good"
           },
           autumn: {
             quality: 0,
             quantity: -1,
+            grow: 10,
             type: "good"
           }
         },
@@ -440,21 +444,25 @@ export const useAppStore = defineStore("app", {
           winter: {
             quality: +3,
             quantity: 0,
+            grow: 100,
             type: "bad"
           },
           spring: {
             quality: 0,
             quantity: -1,
+            grow: 200,
             type: "bad"
           },
           summer: {
             quality: +3,
             quantity: -2,
+            grow: 800,
             type: "bad"
           },
           autumn: {
             quality: 0,
             quantity: -1,
+            grow: 400,
             type: "bad"
           }
         },
@@ -464,25 +472,114 @@ export const useAppStore = defineStore("app", {
           winter: {
             quality: +3,
             quantity: 0,
-            type: "bad"
+            grow: 20,
+            type: "good"
           },
           spring: {
             quality: 0,
             quantity: -1,
+            grow: 120,
             type: "bad"
           },
           summer: {
             quality: +3,
             quantity: -2,
+            grow: 20,
             type: "good"
           },
           autumn: {
             quality: 0,
             quantity: -1,
+            grow: 160,
+            type: "bad"
+          }
+        },
+        {
+          name: "hailstorm",
+          goddess: true,
+          winter: {
+            quality: +3,
+            quantity: 0,
+            grow: 120,
+            type: "bad"
+          },
+          spring: {
+            quality: 0,
+            quantity: -1,
+            grow: 160,
+            type: "bad"
+          },
+          summer: {
+            quality: +3,
+            quantity: -2,
+            grow: 200,
+            type: "bad"
+          },
+          autumn: {
+            quality: 0,
+            quantity: -1,
+            grow: 260,
+            type: "bad"
+          }
+        },
+        {
+          name: "fire",
+          goddess: true,
+          winter: {
+            quality: +3,
+            quantity: 0,
+            grow: 60,
+            type: "good"
+          },
+          spring: {
+            quality: 0,
+            quantity: -1,
+            grow: 160,
+            type: "bad"
+          },
+          summer: {
+            quality: +3,
+            quantity: -2,
+            grow: 200,
+            type: "bad"
+          },
+          autumn: {
+            quality: 0,
+            quantity: -1,
+            grow: 260,
+            type: "bad"
+          }
+        },
+        {
+          name: "earthquake",
+          goddess: true,
+          winter: {
+            quality: +3,
+            quantity: 0,
+            grow: 100,
+            type: "good"
+          },
+          spring: {
+            quality: 0,
+            quantity: -1,
+            grow: 160,
+            type: "bad"
+          },
+          summer: {
+            quality: +3,
+            quantity: -2,
+            grow: 200,
+            type: "bad"
+          },
+          autumn: {
+            quality: 0,
+            quantity: -1,
+            grow: 260,
             type: "bad"
           }
         }
       ],
+      goddessInvocations: [],
       currentInvocations: []
     }
   },

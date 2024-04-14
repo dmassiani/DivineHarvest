@@ -4,15 +4,24 @@
   import { useAppStore } from '~/stores/app'
   const appStore = useAppStore();
   const season = ref(appStore.season); // Make appStore.season reactive
-  const goddessInvocations = ref(_.filter(appStore.invocations, { 'goddess': true }));
+  appStore.goddessInvocations = appStore.invocations.filter(invocation => invocation.goddess);
+  const goddessInvocations = ref([])
+
+  onMounted(() => {
+    goddessInvocations.value = _.sampleSize(appStore.goddessInvocations, 3);
+  })
+
   watch(() => appStore.season, (newSeason) => {
     season.value = newSeason;
   })
 
   const invocation = () => {
-    const randomInvocation = _.sample(goddessInvocations.value);
-    // Update the appStore
-    appStore.currentInvocations.push(randomInvocation);
+
+    appStore.currentInvocations.push(goddessInvocations.value[0]);
+
+    // je supprime la dernière invocation
+    goddessInvocations.value.pop()
+    goddessInvocations.value.unshift(_.sample(appStore.goddessInvocations));
 
     clearInterval(timer);
     timer = setInterval(() => {
@@ -42,20 +51,8 @@
           Timer
         </div>
         <div class="relative">
-          <div class="bg-stone-100 h-40 w-32 shadow-xl absolute p-4 rounded-lg top-0 left-32">
-            invocation 5
-          </div>
-          <div class="bg-stone-100 h-40 w-32 shadow-xl absolute p-4 rounded-lg top-0 left-24">
-            invocation 4
-          </div>
-          <div class="bg-stone-100 h-40 w-32 shadow-xl absolute p-4 rounded-lg top-0 left-16">
-            invocation 3
-          </div>
-          <div class="bg-stone-100 h-40 w-32 shadow-xl absolute p-4 rounded-lg top-0 left-8">
-            invocation 2
-          </div>
-          <div class="bg-stone-100 h-40 w-32 shadow-xl absolute p-4 rounded-lg top-0 left-0">
-            invocation 1
+          <div v-for="(invocation, index) in goddessInvocations" class="bg-stone-100 h-40 w-32 shadow-xl absolute p-4 rounded-lg top-0" :class="`left-${32 - (index * 8)}`">
+            invocation {{ invocation.name }} {{ index }}
           </div>
         </div>
     </div>
