@@ -40,8 +40,8 @@
 <template>
     <div class="flex-none w-3/12 h-full bg-stone-600 pt-12">
         <div class="flex flex-col items-center justify-center">
-            <img src="https://cdn.pixabay.com/photo/2016/03/31/19/58/avatar-1295429_960_720.png" class="w-32 h-32 rounded-full" alt="goddess">
-            <h1 class="text-2xl font-bold">Goddess</h1>
+            <img src="/divineharvest.png" class="w-60 h-60 border-8 border-emerald-600 rounded-full" alt="goddess">
+            <h1 class="text-2xl font-bold text-white">Divine Harvest</h1>
         </div>
         <div class="relative mt-12 flex ml-12">
           <GameInvocation v-for="(invocation, index) in goddessInvocations" :invocation="invocation" class="-mr-20" />

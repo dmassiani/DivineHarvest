@@ -13,7 +13,7 @@
 
     const colors = chroma.scale(['#292524','#a3e635','#1a2e05']).correctLightness();
     const groundColor = computed(() => {
-        return colors(Math.round(semenceConfig.value.grow/100)).hex()
+        return colors(Math.round(semenceConfig.value.grow/10)).hex()
     })
 
     const { currentInvocations, season } = storeToRefs(appStore)

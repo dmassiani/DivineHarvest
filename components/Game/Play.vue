@@ -81,7 +81,7 @@
 
         <!-- Les saisons -->
         <div class="flex flex-row relative rounded-full overflow-hidden h-6">
-          <div class="absolute h-full bg-transparent border-r-2 border-white" :style="{ 'width': percentage + '%' }"></div>
+          <div class="flex justify-end pr-3 absolute h-full bg-transparent border-r-2 border-white" :style="{ 'width': percentage + '%' }">{{ season }}</div>
           <div class="flex justify-right items-center text-center w-1/4 bg-stone-700 h-14"></div>
           <div class="flex justify-right items-center text-center w-1/4 bg-stone-700 h-14"></div>
           <div class="flex justify-right items-center text-center w-1/4 bg-stone-700 h-14"></div>

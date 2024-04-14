@@ -91,7 +91,7 @@
         </div>
       </div>
       <div class="flex flex-col items-center justify-center">
-          <img src="https://cdn.pixabay.com/photo/2016/03/31/19/58/avatar-1295429_960_720.png" class="w-32 h-32 rounded-full" alt="goddess">
+          <img src="/you.png" class="w-32 h-32 rounded-full border-8 border-stone-700" alt="goddess">
           <h1 class="text-2xl font-bold">You</h1>
       </div>
     </div>

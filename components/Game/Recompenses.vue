@@ -64,7 +64,7 @@
 </script>
 
 <template>
-    <div class="absolute bg-green-200 bottom-0 h-4 w-full left-0">
+    <div class="absolute bottom-0 h-4 w-full left-0">
         <GameRecompensesSemence v-for="(semence, index) in semences" :semence="semence" :index="index" />
     </div>
 </template>

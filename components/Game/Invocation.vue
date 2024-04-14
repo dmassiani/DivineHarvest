@@ -20,10 +20,10 @@
         <h1 class="font-bold text-xl -mt-2">{{ invocation.name }}</h1>
         <div class="text-xs mt-4">
             <div>
-                quality: {{ invocation[season].quality }}
+                quality: {{ invocation[season]?.quality }}
             </div>
             <div>
-                growing: {{ invocation[season].grow }}
+                growing: {{ invocation[season]?.grow }}
             </div>
         </div>
     </div>
