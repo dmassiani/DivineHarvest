@@ -47,6 +47,13 @@
     switcher.value = switcher.value === 'invocations' ? 'semences' : 'invocations'
   }
 
+  const switchSeeds = () => {
+    switcher.value = 'semences'
+  }
+  const switchInvocations = () => {
+    switcher.value = 'invocations'
+  }
+
   const selectSemence = (semence) => {
     appStore.selectedSemence = semence
   }
@@ -54,16 +61,20 @@
 </script>
 <template>
     <div class="flex flex-col w-2/12 h-full bg-yellow-200 justify-between p-4">
-      <div @click="switchInvocationsSemences">
-        switch invocations - semences
+      <div class="sm:block mb-4">
+        <nav class="flex space-x-4" aria-label="Tabs">
+          <a href="#" @click.prevent="switchSeeds" class="bg-stone-900 text-stone-100 rounded-md px-3 py-2 text-sm font-medium">Seeds</a>
+          <a href="#" @click.prevent="switchInvocations" class="text-stone-700 hover:text-stone-900 rounded-md px-3 py-2 text-sm font-medium">Invocations</a>
+        </nav>
       </div>
+
       <div class="invocations h-full overflow-y-scroll space-y-2" v-if="switcher == 'invocations'">
         <div class="flex flex-col justify-between space-y-3 h-full">
           <GameInvocation v-for="(invocation, index) in playerInvocations" :invocation="invocation" @click="getInvocation(index)" />
         </div>
       </div>
       <div class="semences h-full overflow-y-scroll space-y-2" v-if="switcher == 'semences'">
-        <div v-for="semence in semences" @click="selectSemence(semence)" class="cursor-pointer flex flex-col bg-white shadow-xl rounded-lg h-auto p-3">
+        <div v-for="semence in semences" @click="selectSemence(semence)" class="cursor-pointer flex flex-col text-lime-100 bg-emerald-600 rounded-lg h-auto p-3">
           <div class="font-bold text-xl">{{ semence.name }}</div>
           <div>
             Price : {{ semence.price }}

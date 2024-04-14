@@ -17,7 +17,7 @@
 <template>
     <div class="bg-stone-100 w-32 h-40 shadow-xl p-4 rounded-lg flex flex-col justify-between text-stone-900">
         <p class="text-xs">God of</p>
-        <h1 class="font-bold text-xl -mt-4">{{ invocation.name }}</h1>
+        <h1 class="font-bold text-xl -mt-2">{{ invocation.name }}</h1>
         <div class="text-xs mt-4">
             <div>
                 quality: {{ invocation[season].quality }}
