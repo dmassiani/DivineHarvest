@@ -501,6 +501,90 @@ export const useAppStore = defineStore("app", {
           }
         },
         {
+          name: "fog",
+          goddess: false,
+          winter: {
+            quality: +3,
+            quantity: 0,
+            grow: 10,
+            type: "good"
+          },
+          spring: {
+            quality: 0,
+            quantity: -1,
+            grow: 20,
+            type: "good"
+          },
+          summer: {
+            quality: +3,
+            quantity: -2,
+            grow: 20,
+            type: "good"
+          },
+          autumn: {
+            quality: 0,
+            quantity: -1,
+            grow: 30,
+            type: "good"
+          }
+        },
+        {
+          name: "lights",
+          goddess: false,
+          winter: {
+            quality: +3,
+            quantity: 0,
+            grow: 10,
+            type: "good"
+          },
+          spring: {
+            quality: 0,
+            quantity: -1,
+            grow: 20,
+            type: "good"
+          },
+          summer: {
+            quality: +3,
+            quantity: -2,
+            grow: 20,
+            type: "good"
+          },
+          autumn: {
+            quality: 0,
+            quantity: -1,
+            grow: 30,
+            type: "good"
+          }
+        },
+        {
+          name: "fertility",
+          goddess: false,
+          winter: {
+            quality: +9,
+            quantity: 30,
+            grow: 3,
+            type: "good"
+          },
+          spring: {
+            quality: 30,
+            quantity: 30,
+            grow: 2,
+            type: "good"
+          },
+          summer: {
+            quality: 40,
+            quantity: 4,
+            grow: 2,
+            type: "good"
+          },
+          autumn: {
+            quality: 0,
+            quantity: 90,
+            grow: 3,
+            type: "good"
+          }
+        },
+        {
           name: "storm",
           goddess: true,
           winter: {
@@ -637,6 +721,62 @@ export const useAppStore = defineStore("app", {
             quality: 0,
             quantity: -1,
             grow: 260,
+            type: "bad"
+          }
+        },
+        {
+          name: "disease",
+          goddess: true,
+          winter: {
+            quality: +3,
+            quantity: 0,
+            grow: 400,
+            type: "bad"
+          },
+          spring: {
+            quality: 0,
+            quantity: -1,
+            grow: 300,
+            type: "bad"
+          },
+          summer: {
+            quality: +3,
+            quantity: -2,
+            grow: 230,
+            type: "bad"
+          },
+          autumn: {
+            quality: 0,
+            quantity: -1,
+            grow: 420,
+            type: "bad"
+          }
+        },
+        {
+          name: "dryness",
+          goddess: true,
+          winter: {
+            quality: +3,
+            quantity: 0,
+            grow: 400,
+            type: "bad"
+          },
+          spring: {
+            quality: 0,
+            quantity: -1,
+            grow: 300,
+            type: "bad"
+          },
+          summer: {
+            quality: +3,
+            quantity: -2,
+            grow: 230,
+            type: "bad"
+          },
+          autumn: {
+            quality: 0,
+            quantity: -1,
+            grow: 420,
             type: "bad"
           }
         },

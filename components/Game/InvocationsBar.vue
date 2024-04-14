@@ -64,7 +64,6 @@
   })
 
   const getInvocation = (index) => {
-
     appStore.currentInvocations.push(playerInvocations.value[index]);
     playerInvocations.value.splice(index, 1)
     appStore.playerInvocations = playerInvocations.value
@@ -81,12 +80,16 @@
     switcher.value = 'invocations'
   }
 
+  const selectedIndexSemence = ref(null)
   const selectSemence = (semence, index) => {
     semence.index = index
+    selectedIndexSemence.value = index
     appStore.selectedSemence = semence
   }
+
   useNuxtApp().hooks.hook('app:semence', (message) => {
       semences.value.splice(message.index, 1)
+      selectedIndexSemence.value = null
   });
 
 </script>
@@ -105,7 +108,7 @@
         </div>
       </div>
       <div class="semences h-full overflow-y-scroll space-y-2" v-if="switcher == 'semences'">
-        <div v-for="(semence, index) in semences" @click="selectSemence(semence, index)" class="cursor-pointer flex flex-col text-lime-100 bg-emerald-600 rounded-lg h-auto p-3">
+        <div v-for="(semence, index) in semences" @click="selectSemence(semence, index)" :class="{'bg-emerald-800': selectedIndexSemence == index}" class="cursor-pointer flex flex-col text-lime-100 bg-emerald-600 rounded-lg h-auto p-3">
           <div class="font-semibold text-xl text-white">{{ semence.name }}</div>
           <div>
             Price : ${{ semence.price }}

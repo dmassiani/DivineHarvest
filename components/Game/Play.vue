@@ -19,7 +19,7 @@
   const delayOFRemoveInvocation = 30000;
   onMounted(() => {
     setInterval(() => {
-      if(appStore.currentInvocations.length > 0) appStore.currentInvocations.shift();
+      if(appStore.currentInvocations.length > 1) appStore.currentInvocations.shift();
     }, delayOFRemoveInvocation);
   });
 
@@ -91,8 +91,9 @@
       </header>
 
       <!-- Le jardin qui est une grille de 3 -->
-      <main class="mt-12">
-        <div class="grid grid-cols-3 gap-4 h-full px-20">
+      <main class="mt-8">
+        <h3 class="text-center">Garden</h3>
+        <div class="grid grid-cols-3 gap-4 h-full px-20 mt-4">
           <GameGarden />
           <GameGarden />
           <GameGarden />
