@@ -896,7 +896,17 @@ export const useAppStore = defineStore("app", {
       goddessInvocations: [],
       playerInvocations: [],
       currentInvocations: [],
-      nouvelleRecompenses: []
+      nouvelleRecompenses: [],
+      dialogs: [
+        "Ah, the simple farmer, always ploughing the land without worrying about the real issues. Your vision is as narrow as your fields.",
+        "You think your crops are your pride, but really, it's my gifts you're harvesting. Never forget who holds the real power here.",
+        "Your laborious efforts are but ants fighting a hurricane. The land is mine, peasant, and I won't let you plunder it with impunity.",
+        "All these efforts to cultivate the land, but you don't even understand the whispers of nature. You're just a stranger in the land I rule.",
+        "You think you can defy the elements and claim the land as your own? You overestimate yourself, peasant. I'm the only real force here.",
+        "Your modest ambitions as a farmer are nothing compared to my plans for this land. Submit to my will, peasant, or suffer the consequences.",
+        "Your claim to make a living from farming is touching, peasant. But on this earth, my will prevails. Accept it, or be prepared to pay the price.",
+        "Ah, the brave farmer, defying the elements with his forks and rakes. Your bravery is as great as your harvest, which is to say, tiny."
+      ],
     }
   },
   getters: {

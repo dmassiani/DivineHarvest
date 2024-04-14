@@ -6,6 +6,17 @@
   const season = ref(appStore.season); // Make appStore.season reactive
   appStore.goddessInvocations = appStore.invocations.filter(invocation => invocation.goddess);
   const goddessInvocations = ref([])
+  const dialogueDisplay = ref('');
+  // j'ai besoin d'un interval qui va chercher un dialogue dan qsl'appstore de manière random
+  // je vais chercher un dialogue toutes les 6 secondes
+  onMounted(() => {
+    setInterval(() => {
+      dialogueDisplay.value = '';
+      setTimeout(() => {
+        dialogueDisplay.value = _.sample(appStore.dialogs)
+      }, 10000)
+    }, 18000)
+  })
 
   onMounted(() => {
     goddessInvocations.value = _.sampleSize(appStore.goddessInvocations, 3);
@@ -42,6 +53,7 @@
         <div class="flex flex-col items-center justify-center">
             <img src="/divineharvest.png" class="w-60 h-60 border-8 border-emerald-600 rounded-full" alt="goddess">
             <h1 class="text-2xl font-bold text-white">Divine Harvest</h1>
+            <p class="text-stone-400 p-6">{{ dialogueDisplay }}</p>
         </div>
         <div class="relative mt-12 flex ml-12">
           <GameInvocation v-for="(invocation, index) in goddessInvocations" :invocation="invocation" class="-mr-20" />
