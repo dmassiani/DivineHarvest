@@ -5,5 +5,6 @@
     <GameInvocationsBar />
     <GamePlay />
     <GameGoddess />
+    <GameRecompenses />
   </div>
 </template>

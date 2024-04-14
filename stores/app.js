@@ -5,6 +5,11 @@ export const useAppStore = defineStore("app", {
     return {
       season: "winter",
       tunes: 0,
+      malus: {
+        quantity: 0,
+        quality: 0,
+        grow: 100
+      },
       semences:
       [
         {
@@ -411,7 +416,7 @@ export const useAppStore = defineStore("app", {
       selectedSemence: "",
       invocations: [
         {
-          name: "vent",
+          name: "wind",
           goddess: false,
           winter: {
             quality: +3,
@@ -435,6 +440,62 @@ export const useAppStore = defineStore("app", {
             quality: 0,
             quantity: -1,
             grow: 10,
+            type: "good"
+          }
+        },
+        {
+          name: "rain",
+          goddess: false,
+          winter: {
+            quality: +3,
+            quantity: 0,
+            grow: 130,
+            type: "bad"
+          },
+          spring: {
+            quality: 0,
+            quantity: -1,
+            grow: 60,
+            type: "good"
+          },
+          summer: {
+            quality: +3,
+            quantity: -2,
+            grow: 20,
+            type: "good"
+          },
+          autumn: {
+            quality: 0,
+            quantity: -1,
+            grow: 90,
+            type: "good"
+          }
+        },
+        {
+          name: "ground booster",
+          goddess: false,
+          winter: {
+            quality: +3,
+            quantity: 0,
+            grow: 200,
+            type: "bad"
+          },
+          spring: {
+            quality: 0,
+            quantity: -1,
+            grow: 20,
+            type: "good"
+          },
+          summer: {
+            quality: +3,
+            quantity: -2,
+            grow: 90,
+            type: "good"
+          },
+          autumn: {
+            quality: 0,
+            quantity: -1,
+            grow: 50,
             type: "good"
           }
         },
@@ -467,6 +528,34 @@ export const useAppStore = defineStore("app", {
           }
         },
         {
+          name: "storm",
+          goddess: false,
+          winter: {
+            quality: +3,
+            quantity: 0,
+            grow: 10,
+            type: "good"
+          },
+          spring: {
+            quality: 0,
+            quantity: -1,
+            grow: 90,
+            type: "good"
+          },
+          summer: {
+            quality: +3,
+            quantity: -2,
+            grow: 300,
+            type: "bad"
+          },
+          autumn: {
+            quality: 0,
+            quantity: -1,
+            grow: 200,
+            type: "bad"
+          }
+        },
+        {
           name: "heatwave",
           goddess: true,
           winter: {
@@ -486,6 +575,34 @@ export const useAppStore = defineStore("app", {
             quantity: -2,
             grow: 20,
             type: "good"
+          },
+          autumn: {
+            quality: 0,
+            quantity: -1,
+            grow: 160,
+            type: "bad"
+          }
+        },
+        {
+          name: "heatwave",
+          goddess: false,
+          winter: {
+            quality: +3,
+            quantity: 0,
+            grow: 20,
+            type: "good"
+          },
+          spring: {
+            quality: 0,
+            quantity: -1,
+            grow: 90,
+            type: "good"
+          },
+          summer: {
+            quality: +3,
+            quantity: -2,
+            grow: 400,
+            type: "bad"
           },
           autumn: {
             quality: 0,
@@ -523,12 +640,68 @@ export const useAppStore = defineStore("app", {
           }
         },
         {
+          name: "hailstorm",
+          goddess: false,
+          winter: {
+            quality: +3,
+            quantity: 0,
+            grow: 90,
+            type: "good"
+          },
+          spring: {
+            quality: 0,
+            quantity: -1,
+            grow: 160,
+            type: "bad"
+          },
+          summer: {
+            quality: +3,
+            quantity: -2,
+            grow: 200,
+            type: "bad"
+          },
+          autumn: {
+            quality: 0,
+            quantity: -1,
+            grow: 260,
+            type: "bad"
+          }
+        },
+        {
           name: "fire",
           goddess: true,
           winter: {
             quality: +3,
             quantity: 0,
             grow: 60,
+            type: "good"
+          },
+          spring: {
+            quality: 0,
+            quantity: -1,
+            grow: 160,
+            type: "bad"
+          },
+          summer: {
+            quality: +3,
+            quantity: -2,
+            grow: 200,
+            type: "bad"
+          },
+          autumn: {
+            quality: 0,
+            quantity: -1,
+            grow: 260,
+            type: "bad"
+          }
+        },
+        {
+          name: "fire",
+          goddess: true,
+          winter: {
+            quality: +3,
+            quantity: 0,
+            grow: 10,
             type: "good"
           },
           spring: {
@@ -580,6 +753,7 @@ export const useAppStore = defineStore("app", {
         }
       ],
       goddessInvocations: [],
+      playerInvocations: [],
       currentInvocations: []
     }
   },

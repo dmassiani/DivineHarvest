@@ -6,6 +6,22 @@
   const tunes = computed(() => {
     return Math.round(appStore.tunes / 10);
   });
+  const malusQuality = computed(() => {
+    return appStore.malus.quality;
+  });
+  const malusQuantity = computed(() => {
+    return appStore.malus.quantity;
+  });
+  const malusGrow = computed(() => {
+    return appStore.malus.grow;
+  });
+
+  const delayOFRemoveInvocation = 30000;
+  onMounted(() => {
+    setInterval(() => {
+      appStore.currentInvocations.shift();
+    }, delayOFRemoveInvocation);
+  });
 
   let seasonCursor = 0;
   const seasons = ['winter', 'spring', 'summer', 'fall'];
@@ -54,7 +70,12 @@
       <header class="flex flex-col w-full space-y-4">
 
         <!-- Les scores -->
-        <div class="flex flex-row justify-end">
+        <div class="flex flex-row justify-between">
+          <div>
+            <h2 class="text-2xl font-bold">Ground health</h2>
+            <p class="text-sm">Quality : {{ malusQuality }}</p>
+            <p class="text-sm">Delay between growths : {{ malusGrow }}</p>
+          </div>
           <h1 class="text-4xl font-bold">${{ tunes }}</h1>
         </div>
 
@@ -87,12 +108,7 @@
 
       <!-- les invocations en cours de sa mère la goddess -->
       <div class="flex flex-row mt-8">
-        <div v-for="goddessInvocation in goddessInvocations">
-          <div class="bg-stone-100 h-40 w-32 shadow-xl p-4 rounded-lg -mr-20">
-            invocation {{ goddessInvocation.name }}
-          </div>
-        </div>
-
+        <GameInvocation  v-for="goddessInvocation in goddessInvocations" :invocation="goddessInvocation" class="-mr-20" />
       </div>
 
     </div>

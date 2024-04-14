@@ -26,6 +26,11 @@
         malusQuantity.value = sumQuantity;
         // malusGrow est une moyenne de grow et du nombre d'invocations
         malusGrow.value = Math.round(grow / currentInvocations.value.length);
+        appStore.malus = {
+            quality: malusQuality.value,
+            quantity: malusQuantity.value,
+            grow: malusGrow.value
+        }
     };
 
 
@@ -62,6 +67,8 @@
         const semenceCloned = _.cloneDeep(semenceConfig.value)
         const gain = semenceCloned.quality * semenceCloned.quantity * semenceCloned.grow
         appStore.tunes += gain
+        // je créé un event pour dire au jeu que j'ai récolté
+        useNuxtApp().callHook("app:recolte", gain)
     }
 
     const clickOnGarden = () => {
@@ -90,7 +97,8 @@
         appStore.selectedSemence = null
 
         semenceConfig.value.quality = currentSemence.value[season.value].quality + malusQuality.value
-        semenceConfig.value.quantity = currentSemence.value[season.value].quantity + malusQuantity.value
+        semenceConfig.value.quantity = currentSemence.value[season.value].quantity
+        // semenceConfig.value.quantity = _.random(10, 60) + malusQuantity.value
 
         timer = setInterval(() => {
             // je fais pousser les semences

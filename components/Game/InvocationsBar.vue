@@ -1,10 +1,25 @@
 <script setup>
 
+  import _ from 'lodash'
   import { useAppStore } from '~/stores/app'
   const appStore = useAppStore();
   const semences = ref(appStore.getSemences)
   const season = ref(appStore.season)
   const switcher = ref('semences')
+
+  // mes invocations
+  const playerInvocations = ref(_.sampleSize(appStore.invocations.filter(invocation => !invocation.goddess), 5))
+  appStore.playerInvocations = playerInvocations.value
+
+  const getInvocation = (index) => {
+
+    appStore.currentInvocations.push(playerInvocations.value[index]);
+
+    // appStore.currentInvocations.push(goddessInvocations.value[goddessInvocations.value.length - 1]);
+    // je supprime cet index des invocations du player
+    playerInvocations.value.splice(index, 1)
+    appStore.playerInvocations = playerInvocations.value
+  };
 
   const switchInvocationsSemences = () => {
     switcher.value = switcher.value === 'invocations' ? 'semences' : 'invocations'
@@ -21,33 +36,9 @@
         switch invocations - semences
       </div>
       <div class="invocations h-full overflow-y-scroll space-y-2" v-if="switcher == 'invocations'">
-        <ol class="flex flex-col justify-between space-y-3 h-full">
-          <li>
-            <div class="flex justify-between bg-white shadow-xl rounded-lg h-32">
-              <div>Invocation 1</div>
-            </div>
-          </li>
-          <li>
-            <div class="flex justify-between bg-white shadow-xl rounded-lg h-32">
-              <div>Invocation 2</div>
-            </div>
-          </li>
-          <li>
-            <div class="flex justify-between bg-white shadow-xl rounded-lg h-32">
-              <div>Invocation 3</div>
-            </div>
-          </li>
-          <li>
-            <div class="flex justify-between bg-white shadow-xl rounded-lg h-32">
-              <div>Invocation 4</div>
-            </div>
-          </li>
-          <li>
-            <div class="flex justify-between bg-white shadow-xl rounded-lg h-32">
-              <div>Invocation 5</div>
-            </div>
-          </li>
-        </ol>
+        <div class="flex flex-col justify-between space-y-3 h-full">
+          <GameInvocation v-for="(invocation, index) in playerInvocations" :invocation="invocation" @click="getInvocation(index)" />
+        </div>
       </div>
       <div class="semences h-full overflow-y-scroll space-y-2" v-if="switcher == 'semences'">
         <div v-for="semence in semences" @click="selectSemence(semence)" class="cursor-pointer flex flex-col bg-white shadow-xl rounded-lg h-auto p-3">

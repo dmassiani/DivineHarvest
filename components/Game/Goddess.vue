@@ -44,9 +44,7 @@
             <h1 class="text-2xl font-bold">Goddess</h1>
         </div>
         <div class="relative mt-12 flex ml-12">
-          <div v-for="(invocation, index) in goddessInvocations" class="bg-stone-100 h-40 w-32 shadow-xl  p-4 rounded-lg -mr-20">
-            invocation {{ invocation.name }} {{ index }}
-          </div>
+          <GameInvocation v-for="(invocation, index) in goddessInvocations" :invocation="invocation" class="-mr-20" />
         </div>
         <!-- tricks for tailwind -->
         <div class="left-32 left-24 left-16"></div>
