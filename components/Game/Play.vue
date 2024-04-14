@@ -19,7 +19,7 @@
   const delayOFRemoveInvocation = 30000;
   onMounted(() => {
     setInterval(() => {
-      appStore.currentInvocations.shift();
+      if(appStore.currentInvocations.length > 0) appStore.currentInvocations.shift();
     }, delayOFRemoveInvocation);
   });
 
@@ -66,7 +66,7 @@
 
 </script>
 <template>
-    <div class="grow h-full bg-stone-400 p-4">
+    <div class="grow h-full p-4 bg-stone-900 text-white">
       <header class="flex flex-col w-full space-y-4">
 
         <!-- Les scores -->
@@ -80,19 +80,18 @@
         </div>
 
         <!-- Les saisons -->
-        <div class="flex flex-row relative">
-          <div class="absolute h-full bg-black" :style="{ 'width': percentage + '%' }"></div>
-
-          <div class="flex justify-right items-center text-center w-1/4 bg-cyan-100 h-14">winter</div>
-          <div class="flex justify-right items-center text-center w-1/4 bg-yellow-100 h-14">spring</div>
-          <div class="flex justify-right items-center text-center w-1/4 bg-yellow-400 h-14">summer</div>
-          <div class="flex justify-right items-center text-center w-1/4 bg-orange-100 h-14">fall</div>
+        <div class="flex flex-row relative rounded-full overflow-hidden h-6">
+          <div class="absolute h-full bg-transparent border-r-2 border-white" :style="{ 'width': percentage + '%' }"></div>
+          <div class="flex justify-right items-center text-center w-1/4 bg-stone-700 h-14"></div>
+          <div class="flex justify-right items-center text-center w-1/4 bg-stone-700 h-14"></div>
+          <div class="flex justify-right items-center text-center w-1/4 bg-stone-700 h-14"></div>
+          <div class="flex justify-right items-center text-center w-1/4 bg-stone-700 h-14"></div>
         </div>
 
       </header>
 
       <!-- Le jardin qui est une grille de 3 -->
-      <main class="mt-4">
+      <main class="mt-12">
         <div class="grid grid-cols-3 gap-4 h-full px-20">
           <GameGarden />
           <GameGarden />

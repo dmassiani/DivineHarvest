@@ -38,7 +38,7 @@
 
 </script>
 <template>
-    <div class="flex-none w-3/12 h-full bg-green-100 pt-12">
+    <div class="flex-none w-3/12 h-full bg-stone-600 pt-12">
         <div class="flex flex-col items-center justify-center">
             <img src="https://cdn.pixabay.com/photo/2016/03/31/19/58/avatar-1295429_960_720.png" class="w-32 h-32 rounded-full" alt="goddess">
             <h1 class="text-2xl font-bold">Goddess</h1>

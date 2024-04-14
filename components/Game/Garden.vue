@@ -1,5 +1,6 @@
 <script setup>
 
+    import chroma from "chroma-js";
     import { useAppStore } from '~/stores/app'
     import { storeToRefs } from 'pinia'
     import _ from 'lodash'
@@ -8,6 +9,12 @@
     const malusQuantity = ref(0);
     const malusQuality = ref(0);
     const malusGrow = ref(100);
+    
+
+    const colors = chroma.scale(['#292524','#a3e635','#1a2e05']).correctLightness();
+    const groundColor = computed(() => {
+        return colors(Math.round(semenceConfig.value.grow/100)).hex()
+    })
 
     const { currentInvocations, season } = storeToRefs(appStore)
     let timer = null;
@@ -50,6 +57,10 @@
         }
     }, { deep: true })
 
+    const selected = computed(() => {
+        return currentSemence.value !== null
+    })
+
     // ##########################################
     // CHANGEMENT DE SAISON
     // ##########################################
@@ -61,6 +72,10 @@
         quality: 0,
         quantity: 0,
         grow: 0
+    })
+    // il me faut un computed de growing
+    const growing = computed(() => {
+        return Math.round(semenceConfig.value.grow/100) * 4
     })
 
     const recolte = () => {
@@ -98,6 +113,7 @@
 
         semenceConfig.value.quality = currentSemence.value[season.value].quality + malusQuality.value
         semenceConfig.value.quantity = currentSemence.value[season.value].quantity
+        semenceConfig.value.grow = 0
         // semenceConfig.value.quantity = _.random(10, 60) + malusQuantity.value
 
         timer = setInterval(() => {
@@ -110,12 +126,21 @@
 
 </script>
 <template>
-    <div @click="clickOnGarden" class="h-32 bg-white rounded-lg">
+    <div @click="clickOnGarden" class="flex flex-col items-center justify-center font-bold garden h-32 bg-stone-800 rounded-lg transform" :class="{'border-dashed border-2 border-stone-700': !selected}" :style="`transform: translateY(-${growing}px); box-shadow: 0px ${growing}px 0px 0px ${chroma(groundColor).darken().hex()}; background-color: ${groundColor}`">
         {{ currentSemence?.name }}
+        <div class="text-xs" v-if="semenceConfig.grow != 0">
+            {{ semenceConfig.grow }}
+        </div>
+        <!-- {{ currentSemence?.name }}
         <div>
             <div>Quality: {{ semenceConfig.quality }}</div>
             <div>Quantity: {{ semenceConfig.quantity }}</div>
             <div>Growing: {{ semenceConfig.grow }}</div>
-        </div>
+        </div> -->
     </div>
 </template>
+<style scoped>
+.garden {
+    box-shadow: 0px 7px 0px 0px #000000;
+}
+</style>

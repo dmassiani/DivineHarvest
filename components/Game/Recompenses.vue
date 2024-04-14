@@ -1,5 +1,32 @@
 <script setup>
 
+    import _ from 'lodash'
+    import { useAppStore } from '~/stores/app'
+    const appStore = useAppStore();
+
+    // j'ai besoin d'un set random de semences
+    const semencesTmp = _.sampleSize(appStore.getSemences, 4)
+    semencesTmp.forEach(semence => {
+        semence.spring = {
+        quantity: _.random(1, 10),
+        quality: _.random(1, 10)
+        }
+        semence.summer = {
+        quantity: _.random(1, 10),
+        quality: _.random(1, 10)
+        }
+        semence.autumn = {
+        quantity: _.random(1, 10),
+        quality: _.random(1, 10)
+        }
+        semence.winter = {
+        quantity: _.random(1, 10),
+        quality: _.random(1, 10)
+        }
+        semence.price = _.random(1, 10)
+    })
+    const semences = ref(null)
+
     const gain = ref(null)
     useNuxtApp().hooks.hook('app:recolte', (message) => {
         gain.value = message;
@@ -21,6 +48,7 @@
     const popSemences = () => {
         // je pop des semences
         console.log('pop semences')
+        semences.value = semencesTmp
     }
 
     const popInvocations = () => {
@@ -36,7 +64,7 @@
 </script>
 
 <template>
-    <div class="absolute bg-green-200 bottom-0 h-20 w-full left-0">
-        récompenses {{ gain }}
+    <div class="absolute bg-green-200 bottom-0 h-4 w-full left-0">
+        <GameRecompensesSemence v-for="(semence, index) in semences" :semence="semence" :index="index" />
     </div>
 </template>

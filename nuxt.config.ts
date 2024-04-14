@@ -15,7 +15,8 @@ export default defineNuxtConfig({
     "@nuxt/fonts",
     "@nuxtjs/i18n",
     "@vee-validate/nuxt",
-    "@morev/vue-transitions/nuxt"
+    "@morev/vue-transitions/nuxt",
+    '@hypernym/nuxt-anime'
   ],
 
   routeRules: {
@@ -36,6 +37,10 @@ export default defineNuxtConfig({
     redirect: false,
   },
 
+  anime: {
+    provide: true
+  },
+  
   tailwindcss: {
     exposeConfig: {
       level: 2,

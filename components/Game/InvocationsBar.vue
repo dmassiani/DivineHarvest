@@ -3,7 +3,29 @@
   import _ from 'lodash'
   import { useAppStore } from '~/stores/app'
   const appStore = useAppStore();
-  const semences = ref(appStore.getSemences)
+  const semencesTmp = _.sampleSize(appStore.getSemences,6)
+  semencesTmp.forEach(semence => {
+    semence.spring = {
+      quantity: _.random(1, 10),
+      quality: _.random(1, 10)
+    }
+    semence.summer = {
+      quantity: _.random(1, 10),
+      quality: _.random(1, 10)
+    }
+    semence.autumn = {
+      quantity: _.random(1, 10),
+      quality: _.random(1, 10)
+    }
+    semence.winter = {
+      quantity: _.random(1, 10),
+      quality: _.random(1, 10)
+    }
+    semence.price = _.random(1, 10)
+  })
+
+  const semences = ref(semencesTmp)
+  // je rempli les semences d'une quantité et qualité aléatoire et d'un prix
   const season = ref(appStore.season)
   const switcher = ref('semences')
 
@@ -47,7 +69,7 @@
             Price : {{ semence.price }}
           </div>
           <div class="text-xs">
-            Season properties : 
+            {{ season }} properties : 
             <div>
               Quantity: {{ semence[season].quantity }}
             </div>
