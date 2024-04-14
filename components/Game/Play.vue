@@ -2,7 +2,7 @@
 
   import { useAppStore } from '~/stores/app'
   const appStore = useAppStore();
-
+  const goddessInvocations = ref(appStore.currentInvocations);
   const tunes = computed(() => {
     return Math.round(appStore.tunes / 10);
   });
@@ -72,7 +72,7 @@
 
       <!-- Le jardin qui est une grille de 3 -->
       <main class="mt-4">
-        <div class="grid grid-cols-3 gap-4 h-full">
+        <div class="grid grid-cols-3 gap-4 h-full px-20">
           <GameGarden />
           <GameGarden />
           <GameGarden />
@@ -84,6 +84,16 @@
           <GameGarden />
         </div>
       </main>
+
+      <!-- les invocations en cours de sa mère la goddess -->
+      <div class="flex flex-row mt-8">
+        <div v-for="goddessInvocation in goddessInvocations">
+          <div class="bg-stone-100 h-40 w-32 shadow-xl p-4 rounded-lg -mr-20">
+            invocation {{ goddessInvocation.name }}
+          </div>
+        </div>
+
+      </div>
 
     </div>
 </template>

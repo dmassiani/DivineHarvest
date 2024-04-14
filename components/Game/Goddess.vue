@@ -17,7 +17,7 @@
 
   const invocation = () => {
 
-    appStore.currentInvocations.push(goddessInvocations.value[0]);
+    appStore.currentInvocations.push(goddessInvocations.value[goddessInvocations.value.length - 1]);
 
     // je supprime la dernière invocation
     goddessInvocations.value.pop()
@@ -26,7 +26,7 @@
     clearInterval(timer);
     timer = setInterval(() => {
       invocation();
-    }, _.random(3000, 20000));
+    }, _.random(6000, 60000));
   };
 
   let timer = null;
@@ -38,22 +38,17 @@
 
 </script>
 <template>
-    <div class="flex-none w-3/12 h-full bg-green-100">
+    <div class="flex-none w-3/12 h-full bg-green-100 pt-12">
         <div class="flex flex-col items-center justify-center">
             <img src="https://cdn.pixabay.com/photo/2016/03/31/19/58/avatar-1295429_960_720.png" class="w-32 h-32 rounded-full" alt="goddess">
             <h1 class="text-2xl font-bold">Goddess</h1>
-            <p class="text-sm">Level: 1</p>
-            <p class="text-sm">Exp: 0/100</p>
-            <p class="text-sm">Gold: 0</p>
         </div>
-        <div>
-          <!-- circle timer -->
-          Timer
-        </div>
-        <div class="relative">
-          <div v-for="(invocation, index) in goddessInvocations" class="bg-stone-100 h-40 w-32 shadow-xl absolute p-4 rounded-lg top-0" :class="`left-${32 - (index * 8)}`">
+        <div class="relative mt-12 flex ml-12">
+          <div v-for="(invocation, index) in goddessInvocations" class="bg-stone-100 h-40 w-32 shadow-xl  p-4 rounded-lg -mr-20">
             invocation {{ invocation.name }} {{ index }}
           </div>
         </div>
+        <!-- tricks for tailwind -->
+        <div class="left-32 left-24 left-16"></div>
     </div>
 </template>

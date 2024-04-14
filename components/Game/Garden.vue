@@ -102,7 +102,7 @@
 
 </script>
 <template>
-    <div @click="clickOnGarden" class="h-48 bg-white rounded-lg">
+    <div @click="clickOnGarden" class="h-32 bg-white rounded-lg">
         {{ currentSemence?.name }}
         <div>
             <div>Quality: {{ semenceConfig.quality }}</div>
