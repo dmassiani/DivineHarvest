@@ -9,12 +9,20 @@
     const malusQuantity = ref(0);
     const malusQuality = ref(0);
     const malusGrow = ref(100);
-    
+    const focus = ref(false)
 
     const colors = chroma.scale(['#292524','#a3e635','#1a2e05']).correctLightness();
     const groundColor = computed(() => {
         return colors(Math.round(semenceConfig.value.grow/10)).hex()
     })
+
+    useNuxtApp().hooks.hook('app:selectgarden', () => {
+      focus.value = true
+    });
+
+    useNuxtApp().hooks.hook('app:unselectgarden', () => {
+      focus.value = false
+    });
 
     const { currentInvocations, season } = storeToRefs(appStore)
     let timer = null;
@@ -93,6 +101,8 @@
             clearInterval(timer);
         }
 
+        useNuxtApp().callHook("app:unselectgarden")
+
         if (currentSemence.value !== null) {
             // s'il y a une semence en cours de pousse
             recolte()
@@ -127,17 +137,11 @@
 
 </script>
 <template>
-    <div @click="clickOnGarden" class="flex flex-col items-center justify-center font-bold garden h-32 bg-stone-800 rounded-lg transform" :class="{'border-dashed border-2 border-stone-700': !selected}" :style="`transform: translateY(-${growing}px); box-shadow: 0px ${growing}px 0px 0px ${chroma(groundColor).darken().hex()}; background-color: ${groundColor}`">
+    <div @click="clickOnGarden" class="flex flex-col items-center justify-center font-bold garden h-32 bg-stone-800 rounded-lg transform" :class="{'border-dashed border-2 border-stone-700': !selected, 'bg-stone-400': focus}" :style="`transform: translateY(-${growing}px); box-shadow: 0px ${growing}px 0px 0px ${chroma(groundColor).darken().hex()}; background-color: ${groundColor}`">
         {{ currentSemence?.name }}
         <div class="text-xs" v-if="semenceConfig.grow != 0">
             {{ semenceConfig.grow }}
         </div>
-        <!-- {{ currentSemence?.name }}
-        <div>
-            <div>Quality: {{ semenceConfig.quality }}</div>
-            <div>Quantity: {{ semenceConfig.quantity }}</div>
-            <div>Growing: {{ semenceConfig.grow }}</div>
-        </div> -->
     </div>
 </template>
 <style scoped>

@@ -85,6 +85,7 @@
     semence.index = index
     selectedIndexSemence.value = index
     appStore.selectedSemence = semence
+    useNuxtApp().callHook("app:selectgarden")
   }
 
   useNuxtApp().hooks.hook('app:semence', (message) => {
