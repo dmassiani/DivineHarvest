@@ -1,1 +1,0 @@
-# remove all sql files after you modeling your database
